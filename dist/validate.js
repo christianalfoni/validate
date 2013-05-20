@@ -213,4 +213,4 @@
     } else {
         window.validate = validate;
     }
-}(window || {}));
+}(typeof window === 'undefined' ? {} : window));
