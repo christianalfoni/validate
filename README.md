@@ -155,3 +155,46 @@ be used in your validator like this:
     ...
   ```
 You just replace the % in the string with whatever value you want.
+
+### Starting up project
+Just run <strong>npm install</strong> in the root of the project to get the deps. Run <strong>grunt</strong> to start
+a web server and hit localhost:9001 in your browser to test the index.html file in the root.
+
+### Testing and deploying
+Write a test for your validator in the tests/specs/validate.test.js file, here is an example from the file:
+  ```javascript
+    ...
+      /*
+     *
+     * EMAIL validator
+     *
+     */
+    describe('email validator', function() {
+        it('should fail on missing property', function() {
+            var validation = validate({
+            }, {
+                email: ['email']
+            });
+            validation.isValid.should.be.false;
+            validation.errors.email[0].should.equal(missingDataError);
+        });
+        it('should fail when not an email', function() {
+            var validation = validate({
+                email: 'test@test'
+            }, {
+                email: ['email']
+            });
+            validation.isValid.should.be.false;
+            validation.errors.email[0].should.equal('Not valid email');
+        });
+        it('should succeed when is a valid email', function() {
+        var validation = validate({
+            email: 'test@test.no'
+        }, {
+            email: ['email']
+        });
+        validation.isValid.should.be.true;
+    });
+    ...
+  ```
+When you have written your test, run <strong>grunt test</strong> in your terminal. To deploy it, run <strong>grunt deploy</strong>.
