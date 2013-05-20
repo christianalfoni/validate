@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<div id="mocha"></div>
+<!-- The test library: MOCHA -->
+<script src="libs/mocha.js" type="text/javascript" charset="utf-8"></script>
+<!-- The test tools: CHAI -->
+<script src="libs/chai.js" type="text/javascript" charset="utf-8"></script>
+<!-- Require JS to load tests -->
+<script src="vendors/require.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+
+    // Sets base url and loads jquery
+    require.config({
+        baseUrl: '../',
+        paths: {
+            'validate': 'src/validate'
+        }
+    });
+
+    // configures mocha
+    mocha.setup({
+        ui: 'bdd',
+        ignoreLeaks: true
+    });
+
+    // phantom JS does not have a console
+    console = window.console || function() {
+    };
+
+    // Don't track
+    window.notrack = true;
+
+    var runMocha = function() {
+        mocha.run();
+    };
+
+    // Set global test tools
+    var should = chai.should();
+
+    // List of tests
+    require([
+        'specs/validate.test.js'
+    ], runMocha);
+
+</script>
+
+</body>
+</html>

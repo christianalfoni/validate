@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Validate sandbox</title>
+    </head>
+    <script src="src/validate.js"></script>
+    <body>
+    <script>
+        var validation = validate({
+
+        }, {
+            startTime: ['before:endTime']
+        });
+        console.log(validation);
+    </script>
+    </body>
+</html>
